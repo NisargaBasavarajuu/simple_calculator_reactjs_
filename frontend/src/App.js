@@ -12,7 +12,7 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`http://13.60.41.164:8000/`);
+      const response = await fetch(`http://16.171.38.33:8000/`);
       const data = await response.json();
       if (data.error) {
         setResult("Error: " + data.error);
