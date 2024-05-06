@@ -5,7 +5,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://16.171.38.33:8000/');
+      const response = await fetch('https://16.171.38.33/');
       const data = await response.json();
       setMessage(data.message);
     } catch (error) {
