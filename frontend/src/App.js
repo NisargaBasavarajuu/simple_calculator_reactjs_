@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
-import './App.css';
-
 function App() {
-  const [expression, setExpression] = useState('');
-  const [result, setResult] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleChange = (event) => {
-    setExpression(event.target.value);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const fetchData = async () => {
     try {
      const response = await fetch(`https://16.171.38.33:8000/api/calculate/?expression=${encodeURIComponent(expression)}`);
       const data = await response.json();
@@ -33,7 +25,6 @@ function App() {
       console.error('Error fetching data:', error);
     }
   };
-
   return (
     <div className="App">
       <header className="App-header">
