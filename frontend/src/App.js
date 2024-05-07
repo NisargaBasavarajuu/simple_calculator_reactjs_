@@ -1,23 +1,38 @@
 import React, { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [message, setMessage] = useState('');
+  const [expression, setExpression] = useState('');
+  const [result, setResult] = useState('');
 
-  const fetchData = async () => {
+  const handleChange = (event) => {
+    setExpression(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      const response = await fetch('https://16.171.38.33/');
+      const response = await fetch(`http://localhost:8000/api/calculate/?expression=${encodeURIComponent(expression)}`);
       const data = await response.json();
-      setMessage(data.message);
+      if (data.error) {
+        setResult("Error: " + data.error);
+      } else {
+        setResult(data.result);
+      }
     } catch (error) {
-      console.error('Error fetching data:', error);
+      setResult("Error: " + error.message);
     }
   };
+
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Calculator App Message</h1>
-        <button onClick={fetchData}>Get Response</button>
-        <p>{message}</p>
+        <h1>Simple Calculator</h1>
+        <form onSubmit={handleSubmit}>
+          <input type="text" value={expression} onChange={handleChange} />
+          <button type="submit">Calculate</button>
+        </form>
+        <h2>Result: {result}</h2>
       </header>
     </div>
   );
