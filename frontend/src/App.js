@@ -26,7 +26,7 @@ function App() {
  """
   const fetchData = async () => {
     try {
-      const response = await fetch('https://16.171.38.33/');
+      const response = await fetch('https://16.171.38.33/api/calculate/?expression=${encodeURIComponent(expression)}');
       const data = await response.json();
       setMessage(data.message);
     } catch (error) {
