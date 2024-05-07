@@ -12,7 +12,7 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`https://16.171.38.33:8000/api/calculate/?expression=${encodeURIComponent(expression)}`);
+     const response = await fetch(`https://16.171.38.33:8000/api/calculate/?expression=${encodeURIComponent(expression)}`);
       const data = await response.json();
       if (data.error) {
         setResult("Error: " + data.error);
@@ -24,15 +24,22 @@ function App() {
     }
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch('https://16.171.38.33/api/calculate/?expression=${encodeURIComponent(expression)}');
+      const data = await response.json();
+      setMessage(data.message);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Simple Calculator</h1>
-        <form onSubmit={handleSubmit}>
-          <input type="text" value={expression} onChange={handleChange} />
-          <button type="submit">Calculate</button>
-        </form>
-        <h2>Result: {result}</h2>
+        <h1>Calculator App Message</h1>
+        <button onClick={fetchData}>Get Response</button>
+        <p>{message}</p>
       </header>
     </div>
   );
