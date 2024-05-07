@@ -1,7 +1,28 @@
 import React, { useState } from 'react';
+import './App.css';
 
 function App() {
   const [message, setMessage] = useState('');
+  const [result, setResult] = useState('');
+
+  const handleChange = (event) => {
+    setExpression(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:8000/api/calculate/?expression=${encodeURIComponent(expression)}`);
+      const data = await response.json();
+      if (data.error) {
+        setResult("Error: " + data.error);
+      } else {
+        setResult(data.result);
+      }
+    } catch (error) {
+      setResult("Error: " + error.message);
+    }
+  };
 
   const fetchData = async () => {
     try {
