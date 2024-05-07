@@ -23,7 +23,7 @@ function App() {
       setResult("Error: " + error.message);
     }
   };
-
+ """
   const fetchData = async () => {
     try {
       const response = await fetch('https://16.171.38.33/');
@@ -33,6 +33,7 @@ function App() {
       console.error('Error fetching data:', error);
     }
   };
+  """
 
   return (
     <div className="App">
