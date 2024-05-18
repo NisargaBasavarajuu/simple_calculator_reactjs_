@@ -12,7 +12,7 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`https://13.53.205.95/api/calculate/?expression=${encodeURIComponent(expression)}`);
+      const response = await fetch(`https://16.170.235.38/api/calculate/?expression=${encodeURIComponent(expression)}`);
       const data = await response.json();
       if (data.error) {
         setResult("Error: " + data.error);
